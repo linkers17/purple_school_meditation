@@ -29,6 +29,7 @@ const { meditation } = defineProps<Props>()
   padding: 22px 30px;
   border-radius: 20px;
   color: var(--color-font-dark);
+  max-width: 340px;
 }
 
 .meditation-card-title {
