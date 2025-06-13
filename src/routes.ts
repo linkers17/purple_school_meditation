@@ -5,7 +5,7 @@ export const router = createRouter({
     {
       component: () => import('@/views/AuthView.vue'),
       name: 'auth',
-      path: '/auth'
+      path: '/'
     },
     {
       children: [
