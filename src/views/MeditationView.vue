@@ -2,7 +2,7 @@
   <div class="meditation">
     <div class="meditation-profile">
       <div class="meditation-profile__avatar">
-        <img src="@/assets/avatar.png" alt="profile-avatar">
+        <img src="/public/avatar.png" alt="profile-avatar">
       </div>
       <span class="meditation-profile__title">Добро пожаловать, Наталья!</span>
       <span class="meditation-profile__description">Как вы сегодня себя чувствуете?</span>
