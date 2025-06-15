@@ -42,10 +42,12 @@ export const useAuthStore = defineStore('auth', () => {
       id: data.data.user.id,
       username: data.data.user.username,
     }
+    return data
   }
 
   const register = async (payload: RequestRegisterInterface) => {
-    await api.post<ResponseRegisterInterface>(apiRoutes.REGISTER, payload)
+    const { data } = await api.post<ResponseRegisterInterface>(apiRoutes.REGISTER, payload)
+    return data
   }
 
   return {

@@ -41,17 +41,16 @@ const form = ref<RequestRegisterInterface>({
 const onSubmit = () => {
   if (!form.value.username || !form.value.password || !form.value.email)
     return
-  try {
-    authStore.register(form.value)
-    form.value = {
-      email: '',
-      password: '',
-      username: '',
-    }
-    router.push({ name: 'login' })
-  } catch (err) {
-    console.error(err)
-  }
+  authStore.register(form.value)
+    .then(() => {
+      form.value = {
+        email: '',
+        password: '',
+        username: '',
+      }
+      router.push({ name: 'login' })
+    })
+    .catch(err => console.error(err))
 }
 </script>
 

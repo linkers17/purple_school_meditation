@@ -12,16 +12,24 @@ export const useProfileStore = defineStore('profile', () => {
   const user = ref<UserInterface | null>(null)
 
   const getUser = async () => {
-    const { data } = await api.get<ProfileInterface>(apiRoutes.PROFILE)
-    user.value = {
-      email: data.data.user.email,
-      id: data.data.user.id,
-      username: data.data.user.username,
+    try {
+      const { data } = await api.get<ProfileInterface>(apiRoutes.PROFILE)
+      user.value = {
+        email: data.data.user.email,
+        id: data.data.user.id,
+        username: data.data.user.username,
+      }
+    } catch (e) {
+      console.error(e)
     }
   }
 
   const setState = async (payload: RequestStateInterface)=> {
-    await api.post<ResponseStateInterface>(apiRoutes.STATS, payload)
+    try {
+      await api.post<ResponseStateInterface>(apiRoutes.STATS, payload)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return {

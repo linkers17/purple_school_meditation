@@ -18,7 +18,7 @@ import IconCalm from '@/components/icons/IconCalm.vue';
 import IconRelax from './icons/IconRelax.vue';
 import IconFocus from '@/components/icons/IconFocus.vue';
 import IconAnxious from '@/components/icons/IconAnxious.vue';
-import type { RequestStateInterface } from '@/types/profile.interface.ts';
+import { FeelingTypes, type RequestStateInterface } from '@/types/profile.interface.ts';
 
 const emit = defineEmits<{
   (e: 'setState', payload: RequestStateInterface): void,
@@ -28,25 +28,25 @@ const state = [
   {
     icon: IconCalm,
     title: 'Спокойно',
-    type: 'feeling_calm',
+    type: FeelingTypes.CALM,
     value: 1,
   },
   {
     icon: IconRelax,
     title: 'Расслабленно',
-    type: 'relax',
+    type: FeelingTypes.RELAX,
     value: 2,
   },
   {
     icon: IconFocus,
     title: 'Фокусировано',
-    type: 'focus',
+    type: FeelingTypes.FOCUS,
     value: 3,
   },
   {
     icon: IconAnxious,
     title: 'Тревожно',
-    type: 'anxious',
+    type: FeelingTypes.ANXIOUS,
     value: 4,
   },
 ]

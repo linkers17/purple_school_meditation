@@ -34,15 +34,14 @@ const form = ref<RequestLoginInterface>({
 const onSubmit = () => {
   if (!form.value.username || !form.value.password)
     return
-  try {
-    authStore.login(form.value)
-    form.value = {
-      password: '',
-      username: '',
-    }
-  } catch (err) {
-    console.error(err)
-  }
+  authStore.login(form.value)
+    .then(() => {
+      form.value = {
+        password: '',
+        username: '',
+      }
+    })
+    .catch(err => console.error(err))
 }
 
 watch(() => authStore.getToken, () => {
