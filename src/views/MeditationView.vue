@@ -1,12 +1,12 @@
 <template>
   <div class="meditation">
-    <div class="meditation-profile">
+    <div v-if="profileStore.user" class="meditation-profile">
       <div class="meditation-profile__avatar">
         <img src="/avatar.png" alt="profile-avatar">
       </div>
-      <span class="meditation-profile__title">Добро пожаловать, Наталья!</span>
+      <span class="meditation-profile__title">Добро пожаловать, {{ profileStore.user.username }}!</span>
       <span class="meditation-profile__description">Как вы сегодня себя чувствуете?</span>
-      <State />
+      <State @setState="type => setState(type)" />
     </div>
     <div class="meditation-list">
       <MeditationsList />
@@ -17,6 +17,14 @@
 <script lang="ts" setup>
 import MeditationsList from '@/components/MeditationsList.vue';
 import State from '@/components/State.vue';
+import { useProfileStore } from '@/stores/profile.store.ts';
+import type { RequestStateInterface } from '@/types/profile.interface.ts';
+
+const profileStore = useProfileStore()
+
+const setState = (payload: RequestStateInterface) => {
+  profileStore.setState(payload)
+}
 </script>
 
 <style scoped>
