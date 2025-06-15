@@ -9,6 +9,12 @@
             <span>{{ n.name }}</span>
           </router-link>
         </li>
+        <li class="header__nav-list">
+          <a class="header__nav-link" href="#" @click.prevent="logout">
+            <IconLogout />
+            <span>Выход</span>
+          </a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -19,6 +25,11 @@ import Logo from '@/components/Logo.vue';
 import IconMeditation from '@/components/icons/IconMeditation.vue';
 import IconStat from '@/components/icons/IconStat.vue';
 import IconLogout from '@/components/icons/IconLogout.vue';
+import { useAuthStore } from '@/stores/auth.store.ts';
+import { useRouter } from 'vue-router';
+
+const authStore = useAuthStore()
+const router = useRouter()
 
 const nav = [
   {
@@ -35,14 +46,12 @@ const nav = [
       name: 'stat',
     },
   },
-  {
-    icon: IconLogout,
-    name: 'Выход',
-    to: {
-      name: 'auth',
-    },
-  },
 ]
+
+const logout = () => {
+  authStore.clearToken()
+  router.push({ name: 'auth' })
+}
 </script>
 
 <style scoped>

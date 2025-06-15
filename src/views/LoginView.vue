@@ -34,10 +34,14 @@ const form = ref<RequestLoginInterface>({
 const onSubmit = () => {
   if (!form.value.username || !form.value.password)
     return
-  authStore.login(form.value)
-  form.value = {
-    password: '',
-    username: '',
+  try {
+    authStore.login(form.value)
+    form.value = {
+      password: '',
+      username: '',
+    }
+  } catch (err) {
+    console.error(err)
   }
 }
 

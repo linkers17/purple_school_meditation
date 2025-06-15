@@ -46,12 +46,15 @@ export const router = createRouter({
   history: createWebHistory(),
 })
 
-router.beforeEach(to => {
+router.beforeEach((to) => {
   const authStore = useAuthStore()
-  if (!authStore.getToken && to.name !== 'login' && to.name !== 'register') {
-    return { name: 'welcome' }
+  if (to.name === 'welcome') {
+    return
   }
-  if (authStore.getToken && to.name === 'login' || to.name === 'register') {
+  if (!authStore.getToken && (to.name !== 'login' && to.name !== 'register')) {
+    return { name: 'login' }
+  }
+  if (authStore.getToken && (to.name === 'login' || to.name === 'register')) {
     return { name: 'main' }
   }
 })
