@@ -8,10 +8,12 @@ import type {
 } from '@/types/profile.interface.ts';
 import type { UserInterface } from '@/types/user.interface.ts';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth.store.ts';
 
 export const useProfileStore = defineStore('profile', () => {
   const user = ref<UserInterface | null>(null)
   const router = useRouter()
+  const authStore = useAuthStore()
 
   const getUser = async () => {
     try {
@@ -23,7 +25,8 @@ export const useProfileStore = defineStore('profile', () => {
       }
     } catch (e) {
       console.error(e)
-      router.replace({ name: 'auth' })
+      authStore.clearToken()
+      router.replace({ name: 'login' })
     }
   }
 
