@@ -1,5 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store.ts';
+import { jwtDecode } from 'jwt-decode';
+
+const isTokenValid = (token: string) => {
+  if (!token) return false
+  try {
+    const decoded = jwtDecode(token)
+    const { exp } = decoded
+    const now = Date.now() / 1000
+    return exp && exp > now
+  } catch (e) {
+    console.error(e)
+    return false
+  }
+}
 
 export const router = createRouter({
   routes: [
@@ -48,13 +62,14 @@ export const router = createRouter({
 
 router.beforeEach((to) => {
   const authStore = useAuthStore()
+  const isValidToken = isTokenValid(authStore.getToken)
   if (to.name === 'welcome') {
     return
   }
-  if (!authStore.getToken && (to.name !== 'login' && to.name !== 'register')) {
+  if ((!authStore.getToken || !isValidToken) && (to.name !== 'login' && to.name !== 'register')) {
     return { name: 'login' }
   }
-  if (authStore.getToken && (to.name === 'login' || to.name === 'register')) {
+  if (authStore.getToken && isValidToken && (to.name === 'login' || to.name === 'register')) {
     return { name: 'main' }
   }
 })
