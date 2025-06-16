@@ -50,7 +50,10 @@ const onSubmit = () => {
       }
       router.push({ name: 'login' })
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+      console.error(err)
+      alert(err)
+    })
 }
 </script>
 

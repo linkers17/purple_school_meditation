@@ -41,7 +41,10 @@ const onSubmit = () => {
         username: '',
       }
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+      console.error(err)
+      alert(err)
+    })
 }
 
 watch(() => authStore.getToken, () => {

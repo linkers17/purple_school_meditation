@@ -7,16 +7,6 @@
 
 <script lang="ts" setup>
 import Header from '@/components/Header.vue';
-import { useProfileStore } from '@/stores/profile.store.ts';
-import { onMounted } from 'vue';
-
-const profileStore = useProfileStore()
-
-onMounted(() => {
-  if (!profileStore.user) {
-    profileStore.getUser()
-  }
-})
 </script>
 
 <style scoped>
