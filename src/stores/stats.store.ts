@@ -20,12 +20,8 @@ export const useStatsStore = defineStore('stats', () => {
   }
 
   const setDuration = async (payload: RequestDurationStatsInterface) => {
-    try {
-      await api.post<ResponseDurationStatsInterface>(apiRoutes.STATS, payload)
-    } catch (e) {
-      console.error(e)
-      alert(e)
-    }
+    const { data } = await api.post<ResponseDurationStatsInterface>(apiRoutes.STATS, payload)
+    return data
   }
 
   return {

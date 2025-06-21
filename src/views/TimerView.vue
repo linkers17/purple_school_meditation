@@ -120,6 +120,9 @@ const sendTime = () => {
       .then(() => {
         setTimer()
       })
+      .catch(() => {
+        alert('Произошла ошибка при отправке времени.')
+      })
 }
 
 const setTimer = () => {
@@ -141,7 +144,7 @@ const setTimer = () => {
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  background: url("/public/timer-bg.png") no-repeat center;
+  background: url("/timer-bg.png") no-repeat center;
   background-size: cover;
   position: relative;
 }

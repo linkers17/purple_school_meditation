@@ -6,9 +6,23 @@ export enum StatsAlias {
   relax = 'total_relax',
 }
 
+export interface StatInterface {
+  ID: number,
+  CreatedAt: string,
+  UpdatedAt: string,
+  DeletedAt: null,
+  user_id: number,
+  date: string,
+  duration_min: number,
+  feeling_calm: number,
+  feeling_relax: number,
+  feeling_focus: number,
+  feeling_anxiety: number,
+}
+
 export interface StatsResponseInterface {
   data: {
-    stats: Array,
+    stats: StatInterface[],
     summary: {
       total_anxiety: number,
       total_calm: number,
@@ -27,19 +41,7 @@ export interface RequestDurationStatsInterface {
 
 export interface ResponseDurationStatsInterface {
   data: {
-    stat: {
-      ID: number,
-        CreatedAt: string,
-        UpdatedAt: string,
-        DeletedAt: null,
-        user_id: number,
-        date: string,
-        duration_min: number,
-        feeling_calm: number,
-        feeling_relax: number,
-        feeling_focus: number,
-        feeling_anxiety: number,
-    }
+    stat: StatInterface,
   },
   message: string,
   status: string,
