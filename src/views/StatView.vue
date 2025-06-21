@@ -1,46 +1,19 @@
 <template>
-  <div class="stat">
-    <MoodBoosterCard
-      v-for="mood in moodBoosterList"
-      :key="mood.title"
-      :title="mood.title"
-      :color="mood.color"
-      :time="mood.time"
-    />
+  <div v-if="statsStore.stats" class="stat">
+    <Stats />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { MoodBoosterColors } from '@/types/mood-booster.enum.ts';
-import MoodBoosterCard from '@/components/MoodBoosterCard.vue';
+import { useStatsStore } from '@/stores/stats.store.ts';
+import { onMounted } from 'vue';
+import Stats from '@/components/Stats.vue';
 
-const moodBoosterList = [
-  {
-    color: MoodBoosterColors.TEAL,
-    time: 500,
-    title: 'Минут медитации',
-  },
-  {
-    color: MoodBoosterColors.GREEN,
-    time: 10,
-    title: 'Спокойных дней',
-  },
-  {
-    color: MoodBoosterColors.BLUE,
-    time: 32,
-    title: 'Расслабленных дней',
-  },
-  {
-    color: MoodBoosterColors.YELLOW,
-    time: 40,
-    title: 'Фокусированных дней',
-  },
-  {
-    color: MoodBoosterColors.RED,
-    time: 5,
-    title: 'Тревожных дней',
-  },
-]
+const statsStore = useStatsStore()
+
+onMounted(() => {
+  statsStore.fetchStats()
+})
 </script>
 
 <style scoped>
