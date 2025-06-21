@@ -43,6 +43,11 @@ export const router = createRouter({
     {
       children: [
         {
+          component: () => import('@/views/TimerView.vue'),
+          name: 'timer',
+          path: 'timer/:id',
+        },
+        {
           component: () => import('@/views/StatView.vue'),
           name: 'stat',
           path: 'stat',

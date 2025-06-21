@@ -3,10 +3,10 @@
     <div class="meditation-card-title">{{ meditation.title }}</div>
     <div class="meditation-card-description">{{ meditation.description }}</div>
     <div class="meditation-card-action">
-      <button>
+      <router-link :to="{ name: 'timer', params: { id: meditation.ID } }" class="meditation-card-link">
         <span>Начать</span>
         <IconPlay />
-      </button>
+      </router-link>
       <span class="meditation-card-duration">{{ meditation.duration_min }} мин</span>
     </div>
   </div>
@@ -49,7 +49,7 @@ const { meditation } = defineProps<Props>()
   align-items: center;
 }
 
-.meditation-card-action button {
+.meditation-card-action .meditation-card-link {
   background-color: var(--color-bg);
   border: none;
   border-radius: 10px;
@@ -62,7 +62,7 @@ const { meditation } = defineProps<Props>()
   font-family: inherit;
 }
 
-.meditation-card-action button span {
+.meditation-card-action .meditation-card-link span {
   color: var(--color-font-light);
   font-size: 15px;
   font-weight: 500;

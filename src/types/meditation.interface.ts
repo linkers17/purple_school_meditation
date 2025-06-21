@@ -14,3 +14,10 @@ export interface MeditationsListResponse {
     status: string,
   },
 }
+
+export enum MeditationType {
+  RUN = 'run',
+  DAILY = 'daily',
+  EXPERIENCE = 'experience',
+  DEEP = 'deep',
+}
